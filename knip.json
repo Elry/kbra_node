@@ -1,0 +1,16 @@
+{
+  "entry": ["src/**/**/*.js"],
+  "project": ["src/**/*.js", "test/**/*.js"],
+  "ignore": ["coverage/**", "node_modules/**", "**/__tests__/**"],
+  "ignoreDependencies": [],
+  "rules": {
+    "files": "error",
+    "dependencies": "error",
+    "unlisted": "error",
+    "binaries": "error",
+    "unresolved": "error",
+    "exports": "error",
+    "types": "off",
+    "duplicates": "error"
+  }
+}
