@@ -96,6 +96,13 @@ curl -X POST http://localhost:3000/person/ \
     -d '{"firstName": "Goofy", "lastName": "Goof"}'
 ```
 
+### list inserted user above
+```
+curl -X POST http://localhost:3000/person/list \
+     -H "Content-Type: application/json" \
+     -d '{"lastName": "Goof"}'
+```
+
 ### list with filter
 ```
 curl -X POST http://localhost:3000/person/list \
@@ -103,8 +110,22 @@ curl -X POST http://localhost:3000/person/list \
      -d '{"lastName": "Mouse"}'
 ```
 
+### full list
+```
+curl -X POST http://localhost:3000/person/list \
+     -H "Content-Type: application/json"
+```
+
 
 ## Docker handlers
 1. destroy the volume to reset init.sql: `docker compose down -v`;
 2. rebuild image `docker compose build`
 3. start anew `docker compose up -d`
+
+
+### Possible next steps
+1. General mocks
+2. validation middlewares replaced by Joi schemas with celebrate
+3. get instead of post for /list?
+4. more test coverage?
+5. dotenvx usage instead of simple dotenv?
