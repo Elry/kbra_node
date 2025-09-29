@@ -19,25 +19,25 @@
     "prepare": "husky"
   },
   "dependencies": {
-    "dotenv": "^17.2.2",
-    "express": "^4.18.2",
-    "pg": "^8.11.3"
+    "dotenv": "17.2.2",
+    "express": "4.18.2",
+    "pg": "8.11.3"
   },
   "devDependencies": {
-    "@commitlint/cli": "^20.0.0",
-    "@commitlint/config-conventional": "^20.0.0",
-    "@eslint/js": "^9.36.0",
-    "@jest/globals": "^30.2.0",
-    "eslint": "^9.36.0",
-    "eslint-plugin-import": "^2.32.0",
-    "eslint-plugin-jest": "^29.0.1",
-    "globals": "^16.4.0",
-    "husky": "^9.1.7",
-    "jest": "^30.2.0",
-    "knip": "^5.64.1",
-    "lint-staged": "^16.2.3",
-    "nodemon": "^3.1.10",
-    "supertest": "^7.1.4"
+    "@commitlint/cli": "20.0.0",
+    "@commitlint/config-conventional": "20.0.0",
+    "@eslint/js": "9.36.0",
+    "@jest/globals": "30.2.0",
+    "eslint": "9.36.0",
+    "eslint-plugin-import": "2.32.0",
+    "eslint-plugin-jest": "29.0.1",
+    "globals": "16.4.0",
+    "husky": "9.1.7",
+    "jest": "30.2.0",
+    "knip": "5.64.1",
+    "lint-staged": "16.2.3",
+    "nodemon": "3.1.10",
+    "supertest": "7.1.4"
   },
   "lint-staged": {
     "*.{js,cjs,mjs}": [

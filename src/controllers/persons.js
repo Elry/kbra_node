@@ -21,6 +21,12 @@ export const createPersonController = (personQueries) => ({
     }
   },
 
+  /**
+   * 
+   * @param {*} req 
+   * @param {*} res
+   * @returns {Promise<JSON>}
+   */
   listPersons: async (req, res) => {
     try {
       const persons = await personQueries.getPersons(req.validatedFilters)
@@ -31,6 +37,12 @@ export const createPersonController = (personQueries) => ({
     }
   },
 
+  /**
+   * 
+   * @param {*} req 
+   * @param {*} res
+   * @returns {Promise<JSON>}
+   */
   createPerson: async (req, res) => {
     try {
       const newPerson = await personQueries.createPerson(req.validatedPerson)

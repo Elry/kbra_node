@@ -1,7 +1,4 @@
 import { jest } from '@jest/globals';
-
-// Assuming your middleware and validators are in the same file, as provided.
-// If they are separate, adjust the import path accordingly.
 import {
   validatePersonId,
   validateCreatePerson,
@@ -11,7 +8,6 @@ import {
 describe('Validation Middleware (Integration)', () => {
   let mockReq, mockRes, mockNext;
 
-  // Set up mock Express objects before each test
   beforeEach(() => {
     mockReq = {
       params: {},
@@ -25,7 +21,6 @@ describe('Validation Middleware (Integration)', () => {
     mockNext = jest.fn();
   });
 
-  // --- Tests for validatePersonId ---
   describe('validatePersonId', () => {
     it('should call next() and attach the validated ID for a valid numeric string', () => {
       mockReq.params.id = '123';
@@ -48,7 +43,6 @@ describe('Validation Middleware (Integration)', () => {
     });
   });
 
-  // --- Tests for validateCreatePerson ---
   describe('validateCreatePerson', () => {
     it('should call next() and attach sanitized data for a valid person object', () => {
       mockReq.body = { firstName: '  John ', lastName: ' Doe  ' };
@@ -61,7 +55,8 @@ describe('Validation Middleware (Integration)', () => {
     });
 
     it('should return a 400 error if validation fails (e.g., missing field)', () => {
-      mockReq.body = { firstName: 'John' }; // lastName is missing
+      // missing last name
+      mockReq.body = { firstName: 'John' };
 
       validateCreatePerson(mockReq, mockRes, mockNext);
 
@@ -71,7 +66,6 @@ describe('Validation Middleware (Integration)', () => {
     });
   });
 
-  // --- Tests for validateListFilters ---
   describe('validateListFilters', () => {
     it('should call next() and attach sanitized filters from req.query', () => {
       mockReq.body = { firstName: '  Jane  ', extraParam: 'ignore' };

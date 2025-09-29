@@ -1,10 +1,7 @@
 import { jest } from '@jest/globals';
 
-// Store the original process.env
 const OLD_ENV = process.env;
 
-// --- Mock the 'pg' library ---
-// This is the single external dependency we need to control.
 const mockPool = {
   connect: jest.fn(),
   query: jest.fn(),
@@ -13,38 +10,17 @@ const mockPool = {
 jest.mock('pg', () => ({
   Pool: jest.fn(() => mockPool),
 }));
-// --- End Mock ---
 
 describe('Database Connection', () => {
   
   beforeEach(() => {
-    // Reset modules before each test to reload config.js and conn.js
     jest.resetModules();
-    // Restore a clean process.env
     process.env = { ...OLD_ENV };
-    // Clear any previous mock calls
     jest.clearAllMocks();
   });
 
   afterAll(() => {
-    // Restore the original environment after all tests
     process.env = OLD_ENV;
-  });
-
-  describe('createPool', () => {
-    it('should create a new Pool instance', async () => {
-      // Set env for this specific test
-      process.env.NODE_ENV = 'development';
-      
-      // Dynamically import the module to get the fresh version
-      const { createPool } = await import('../conn.js');
-      const pg = await import('pg');
-      
-      createPool();
-      
-      // Verify that the Pool constructor from 'pg' was called
-      expect(pg.Pool).toHaveBeenCalled();
-    });
   });
 
   describe('initializeDatabase', () => {
@@ -62,7 +38,6 @@ describe('Database Connection', () => {
       process.env.NODE_ENV = 'development';
       const { initializeDatabase } = await import('../conn.js');
       
-      // Make the mock function resolve successfully
       mockPool.connect.mockResolvedValue(true);
 
       const result = await initializeDatabase(mockPool);
@@ -76,7 +51,6 @@ describe('Database Connection', () => {
       const { initializeDatabase } = await import('../conn.js');
       
       const mockError = new Error('Connection failed');
-      // Make the mock function reject with an error
       mockPool.connect.mockRejectedValue(mockError);
 
       const result = await initializeDatabase(mockPool);

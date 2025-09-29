@@ -35,7 +35,7 @@ describe('Application Configuration', () => {
     const config = configModule.default;
 
     expect(config.nodeEnv).toBe('production');
-    expect(config.server.port).toBe(8080); // Note: it should be a number
+    expect(config.server.port).toBe(8080);
     expect(config.server.appName).toBe('My Production App');
     expect(config.database.host).toBe('prod-db.example.com');
   });

@@ -1,11 +1,11 @@
-import { Router } from 'express'
+import { Router } from 'express';
 import {
   validatePersonId,
   validateCreatePerson,
   validateListFilters
 } from '../middleware/validation.js';
 
-export const createPersonRoutes = (personController) => {
+export const createPersonRoutes = personController => {
   const router = Router()
 
   router.get(
@@ -26,5 +26,5 @@ export const createPersonRoutes = (personController) => {
     personController.createPerson
   );
 
-  return router
+  return router;
 };

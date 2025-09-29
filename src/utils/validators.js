@@ -1,42 +1,52 @@
-// Pure validation functions
-export const validateId = (id) => {
+
+/**
+ * 
+ * @param {string} id 
+ * @returns {object}
+ */
+export const validateId = id => {
   // Check if the string contains a decimal point
   if (typeof id === 'string' && id.includes('.')) {
-    return { valid: false, error: 'Invalid ID format' }
-  }
+    return { valid: false, error: 'Invalid ID format' };
+  };
   
-  const parsedId = Number.parseInt(id, 10)
+  const parsedId = Number.parseInt(id, 10);
+
   return Number.isNaN(parsedId)
     ? { valid: false, error: 'Invalid ID format' }
-    : { valid: true, id: parsedId }
-}
+    : { valid: true, id: parsedId };
+};
 
-export const validatePersonData = (person) => {
-  const { firstName, lastName } = person
-
+/**
+ * 
+ * @param {{ firstName:string, lastName: string }} 
+ * @returns {object}
+ */
+// HEHO
+export const validatePersonData = ({ firstName, lastName }) => {
   if (!firstName || !lastName) {
-    return { valid: false, error: 'First name and last name are required' }
-  }
+    return { valid: false, error: 'First name and last name are required' };
+  };
 
   if (typeof firstName !== 'string' || typeof lastName !== 'string') {
-    return { valid: false, error: 'First name and last name must be strings' }
-  }
+    return { valid: false, error: 'First name and last name must be strings' };
+  };
 
   if (firstName.trim().length === 0 || lastName.trim().length === 0) {
-    return { valid: false, error: 'First name and last name cannot be empty' }
-  }
+    return { valid: false, error: 'First name and last name cannot be empty' };
+  };
 
   if (firstName.length > 100 || lastName.length > 100) {
-    return { valid: false, error: 'First name and last name must be less than 100 characters' }
-  }
+    return { valid: false, error: 'First name and last name must be less than 100 characters' };
+  };
 
   return { 
     valid: true, 
     data: { 
       firstName: firstName.trim(), 
       lastName: lastName.trim() 
-    } 
-  }
+    }
+  };
 };
 
 /**

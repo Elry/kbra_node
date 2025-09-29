@@ -21,7 +21,6 @@ export default {
     '**/test/**/*.test.js'
   ],
   setupFilesAfterEnv: ['<rootDir>/test/setup.js'],
-  // Force test environment
   testEnvironmentOptions: {
     NODE_ENV: 'test'
   }
