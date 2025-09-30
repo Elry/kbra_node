@@ -21,7 +21,10 @@
   "dependencies": {
     "dotenv": "17.2.2",
     "express": "4.18.2",
-    "pg": "8.11.3"
+    "joi": "18.0.1",
+    "pg": "8.11.3",
+    "pino": "9.12.0",
+    "pino-http": "^10.5.0"
   },
   "devDependencies": {
     "@commitlint/cli": "20.0.0",
@@ -37,11 +40,13 @@
     "knip": "5.64.1",
     "lint-staged": "16.2.3",
     "nodemon": "3.1.10",
+    "pino-pretty": "13.1.1",
     "supertest": "7.1.4"
   },
   "lint-staged": {
     "*.{js,cjs,mjs}": [
       "pnpm run lint"
     ]
-  }
+  },
+  "packageManager": "pnpm@10.15.0+sha512.486ebc259d3e999a4e8691ce03b5cac4a71cbeca39372a9b762cb500cfdf0873e2cb16abe3d951b1ee2cf012503f027b98b6584e4df22524e0c7450d9ec7aa7b"
 }
