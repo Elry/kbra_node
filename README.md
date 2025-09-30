@@ -59,16 +59,14 @@ kbra-node/
 │   │   └── __tests__/
 │   │       └── persons.test.js
 │   ├── middleware/
-│   │   ├── validation.js
+│   │   ├── joiValidation.js
 │   │   └── __tests__/
-│   │       └── validation.test.js
-│   └── utils/
-│       ├── validators.js
-│       └── __tests__/
-│           └── validators.test.js
+│   │       └── joiValidation.test.js
 ├── test/
 │   └── integration/
 │       └── app.test.js
+├── migrations/
+│   ├── {name}.js
 ├── docker-compose.yml
 ├── init.sql
 ├── package.json
@@ -77,6 +75,8 @@ kbra-node/
 ├── jest.config.js
 └── .husky/
     └── pre-commit
+    └── pre-push
+    └── commit-msg
 ```
 
 
@@ -124,8 +124,8 @@ curl -X POST http://localhost:3000/person/list \
 
 
 ### Possible next steps
-1. General mocks
-2. validation middlewares replaced by Joi schemas with celebrate
-3. get instead of post for /list?
-4. more test coverage?
-5. dotenvx usage instead of simple dotenv?
+- [ ] General mocks
+- [x] validation middlewares replaced by Joi schemas with celebrate
+- [ ] get instead of post for /list?
+- [x] more test coverage?
+- [ ] dotenvx usage instead of simple dotenv?
