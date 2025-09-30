@@ -5,7 +5,7 @@ describe('Database Queries', () => {
   describe('buildPersonQuery', () => {
     it('should build query without filters', () => {
       const result = buildPersonQuery();
-      expect(result.query).toBe('SELECT * FROM persons WHERE 1=1');
+      expect(result.query).toBe('SELECT id, first_name, last_name FROM persons WHERE 1=1');
       expect(result.values).toEqual([]);
     });
 
@@ -54,7 +54,7 @@ describe('Database Queries', () => {
         const result = await queries.getPersonById(1);
 
         expect(mockPool.query).toHaveBeenCalledWith(
-          'SELECT * FROM persons WHERE id = $1',
+          'SELECT id, first_name, last_name FROM persons WHERE id = $1',
           [1]
         );
         expect(result).toEqual(expectedPerson);
@@ -66,6 +66,31 @@ describe('Database Queries', () => {
         const result = await queries.getPersonById(999);
 
         expect(result).toBeUndefined();
+      });
+      it('should throw an error if the query fails', async () => {
+        mockPool.query.mockRejectedValueOnce(new Error('DB Error'));
+
+        await expect(queries.getPersonById(1)).rejects.toThrow('An unexpected database error occurred.');
+      });
+    });
+
+    describe('getPersons', () => {
+      it('should call pool.query with correct parameters', async () => {
+        const expectedPersons = [{ id: 1, first_name: 'John', last_name: 'Doe' }];
+        mockPool.query.mockResolvedValueOnce({ rows: expectedPersons });
+
+        const result = await queries.getPersons();
+
+        expect(mockPool.query).toHaveBeenCalledWith(
+          'SELECT id, first_name, last_name FROM persons WHERE 1=1',
+          []
+        );
+        expect(result).toEqual(expectedPersons);
+      });
+      it('should throw an error if the query fails', async () => {
+        mockPool.query.mockRejectedValueOnce(new Error('DB Error'));
+
+        await expect(queries.getPersons()).rejects.toThrow('An unexpected database error occurred.');
       });
     });
 
@@ -83,6 +108,11 @@ describe('Database Queries', () => {
         );
         expect(result).toEqual(expectedResult);
       })
+      it('should throw an error if the query fails', async () => {
+        mockPool.query.mockRejectedValueOnce(new Error('DB Error'));
+
+        await expect(queries.createPerson({ firstName: 'John', lastName: 'Doe' })).rejects.toThrow('An unexpected database error occurred.');
+      });
     });
   });
 });

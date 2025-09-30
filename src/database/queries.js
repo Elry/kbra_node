@@ -15,7 +15,7 @@ const handleDbError = (error, context) => {
  * @returns {object}
  */
 export const buildPersonQuery = (filters = {}) => {
-  let query = 'SELECT * FROM persons WHERE 1=1';
+  let query = 'SELECT id, first_name, last_name FROM persons WHERE 1=1';
   const values = [];
   let paramCount = 0;
 
@@ -39,7 +39,7 @@ export const createPersonQueries = pool => ({
    */
   getPersonById: async id => {
     try {
-      const result = await pool.query('SELECT * FROM persons WHERE id = $1', [id]);
+      const result = await pool.query('SELECT id, first_name, last_name FROM persons WHERE id = $1', [id]);
       return result.rows[0];
     } catch (error) {
       handleDbError(error, 'getPersonById');

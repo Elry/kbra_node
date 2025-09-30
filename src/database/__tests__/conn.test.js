@@ -97,4 +97,24 @@ describe('Database Connection', () => {
       expect(mockPool.query).toHaveBeenCalledWith('SELECT 1 as health_check');
     });
   });
+
+  describe('closePool', () => {
+    it('should call pool.end in a non-test environment', async () => {
+      process.env.NODE_ENV = 'development';
+      const { closePool } = await import('../conn.js');
+
+      await closePool(mockPool);
+
+      expect(mockPool.end).toHaveBeenCalled();
+    });
+
+    it('should not call pool.end in a test environment', async () => {
+      process.env.NODE_ENV = 'test';
+      const { closePool } = await import('../conn.js');
+
+      await closePool(mockPool);
+
+      expect(mockPool.end).not.toHaveBeenCalled();
+    });
+  });
 });
