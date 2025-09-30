@@ -1,10 +1,13 @@
 import express from 'express';
+import pino from 'pino-http';
 import { createPersonRoutes } from './routes/persons.js';
 import { createPersonController } from './controllers/persons.js';
+import logger from './config/logger.js';
 
 // Application factory
 export const createApp = personQueries => {
   const app = express();
+  app.use(pino({ logger }));
   app.use(express.json());
 
   // h-check
@@ -26,7 +29,7 @@ export const createApp = personQueries => {
   // general error catcher
   /* eslint-disable-next-line no-unused-vars */
   app.use((error, req, res, next) => {
-    console.error('Unhandled error:', error)
+    logger.error('Unhandled error:', error)
     res.status(500).json({ error: 'Internal server error' })
   });
 

@@ -1,28 +1,28 @@
 import { Router } from 'express';
 import {
-  validatePersonId,
-  validateCreatePerson,
-  validateListFilters
-} from '../middleware/validation.js';
+  validatePerson,
+  validateId,
+  validateFilters,
+} from '../middleware/joiValidation.js';
 
 export const createPersonRoutes = personController => {
   const router = Router()
 
   router.get(
     '/:id',
-    validatePersonId,
+    validateId,
     personController.getPerson
   );
   
   router.post(
     '/list',
-    validateListFilters,
+    validateFilters,
     personController.listPersons
   );
 
   router.post(
     '/',
-    validateCreatePerson,
+    validatePerson,
     personController.createPerson
   );
 
